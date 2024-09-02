@@ -43,15 +43,11 @@ class MainActivity : AppCompatActivity() {
             adapter = userAdapter
         }
 
-        // Observe the users LiveData
-        userViewModel.users.observe(this, Observer { users ->
+        userViewModel.fetchUsers().observe(this, Observer { users ->
             users?.let {
                 userAdapter.updateData(users)
             }
         })
-
-        // Fetch users from API
-        userViewModel.fetchUsers()
 
         // Check and request location permissions
         if (checkPermissions()) {

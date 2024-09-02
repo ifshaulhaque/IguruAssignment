@@ -12,9 +12,7 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
 
     val users: MutableLiveData<List<User>> = repository.getUsersFromDb()
 
-    fun fetchUsers() {
-        viewModelScope.launch {
-            users.postValue(repository.fetchUsers().value)
-        }
+    fun fetchUsers(): LiveData<List<User>> {
+        return repository.fetchUsers()
     }
 }
